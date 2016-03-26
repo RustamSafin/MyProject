@@ -4,6 +4,8 @@ import com.springapp.mvc.common.CartInfo;
 import com.springapp.mvc.util.Constants;
 import org.springframework.stereotype.Service;
 
+
+
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +32,19 @@ public class CartService {
             cart.setGoods(map);
         } else {
             if (cart.getGoods().containsKey(goodId)) {
-                cart.getGoods().put(goodId, cart.getGoods().get(goodId) + count);
+                cart.getGoods().put(goodId, count);
             } else {
                 cart.getGoods().put(goodId, count);
             }
         }
         session.setAttribute(Constants.SESSION_CART, cart);
+    }
+    public void removeFromCart(HttpSession session, Long goodId) {
+        CartInfo cart = (CartInfo) session.getAttribute(Constants.SESSION_CART);
+        if (cart!=null) {
+            cart.getGoods().remove(goodId);
+
+        }
     }
     public CartInfo getCart (HttpSession session) {
         return (CartInfo) session.getAttribute("cart");

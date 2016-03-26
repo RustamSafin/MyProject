@@ -1,12 +1,13 @@
 $(document).ready(function () {
     $(document).on('blur','.js_Change', function() {
         var $this = $(this);
+        var count=$this.val();
         $.ajax({
             type: 'POST',
             url: '/cart/change',
             data: {
                 goodId: $this.data('id'),
-                count: $this.count('count')
+                count: count
             },
             success: function (data, status) {  // успешное завершение работы
                 console.log('/cart/change result: data=' + data + '; status=' + status);
@@ -19,9 +20,28 @@ $(document).ready(function () {
             }
         });
     });
-    //function check_symbol(event) {
-    //    event= event || window.event;
-    //    if ((event.keyCode > 57 || event.keyCode <48) && (event.keyCode<35 || event.keyCode>39) && event.keyCode!=8)
-    //    return false;
-    //}
+    $('.close1').on('click', function(){
+        var $this = $(".close1");
+        var goodId=$this.data('id');
+        $('.'+$this.data('id')).fadeOut('slow', function(){
+            $.ajax({
+                type: 'POST',
+                url: '/cart/remove',
+                data: {
+                    goodId: goodId
+                },
+                success: function(data,status) {
+                    console.log('/cart/remove result: data=' +data + '; status=' + status);
+                    if (data == 'removed') {
+                        alert('Удалено');
+                        $('.'+$this.data('id')).remove();
+                    }
+                },
+                error: function () {
+                    alert('Приносим извинения.<br/>На сервере произошла ошибка');
+                }
+            });
+
+        });
+    });
 });
