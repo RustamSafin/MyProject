@@ -5,7 +5,6 @@ import com.springapp.mvc.common.GoodInfo;
 import com.springapp.mvc.common.catalog.CatalogFilterInfo;
 import com.springapp.mvc.common.catalog.FilterItem;
 import com.springapp.mvc.common.catalog.PriceFilterItem;
-import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

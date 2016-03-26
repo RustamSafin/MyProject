@@ -1,5 +1,6 @@
 package com.springapp.mvc.controllers;
 
+import com.springapp.mvc.aspects.annotation.IncludeMenuInfo;
 import com.springapp.mvc.common.CartInfo;
 import com.springapp.mvc.common.MenuInfo;
 import com.springapp.mvc.services.CartService;
@@ -31,17 +32,15 @@ public class CartController {
     private HttpServletRequest request;
     @Autowired
     private CartService cartService;
-    @Autowired
-    private MenuService menuService;
+
 
     /**
      * Отображение содержимого коорзины
      */
+    @IncludeMenuInfo
     @RequestMapping
-    public String renderCart(Model model) {
+    public String renderCart() {
         CartInfo cart= cartService.getCart(request.getSession());
-        List<MenuInfo> listMenu = menuService.getMainMenu();
-        model.addAttribute("listMenu", listMenu);
         Map<String,Integer> cartFreemarker = null;
         if (cart==null){
             cart=new CartInfo();

@@ -10,9 +10,10 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+
+    <import resource="spring/spring-aop.xml" />
     <!-- Определяем папку, в которой будем искать веб компоненты (контроллеры)-->
     <context:component-scan base-package="com.springapp.mvc.controllers"/>
-    <context:component-scan base-package="com.springapp.mvc.services"/>
 
     <!-- Разрешаем использование аннотаций Spring MVC (то есть @Controller и.т.д) -->
     <mvc:annotation-driven />
