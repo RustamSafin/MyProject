@@ -1,5 +1,6 @@
 package com.springapp.mvc.common;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -8,11 +9,15 @@ import java.math.BigDecimal;
  * Gataullin Kamil
  * 22.02.2016 22:54
  */
+@Entity
+@Table(name = "h_goods")
 public class GoodInfo {
 
     /**
      * id товара
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
@@ -33,6 +38,8 @@ public class GoodInfo {
     /**
      * Категория товара
      */
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private CategoryInfo category;
 
     /**
@@ -41,6 +48,9 @@ public class GoodInfo {
     private BigDecimal price;
 
     public GoodInfo() {
+    }
+    public GoodInfo(Long id) {
+        this.id=id;
     }
 
     public GoodInfo(Long id, String name, CategoryInfo category, BigDecimal price) {

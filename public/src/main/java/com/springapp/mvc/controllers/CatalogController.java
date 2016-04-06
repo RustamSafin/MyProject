@@ -60,7 +60,6 @@ public class CatalogController {
         model.addAttribute("goodsCount", TEST_GOODS_COUNT);
         return "catalog/catalogPage";
     }
-
     /**
      * Показать еще товары
      *

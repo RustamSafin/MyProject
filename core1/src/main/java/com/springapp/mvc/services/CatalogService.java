@@ -5,6 +5,10 @@ import com.springapp.mvc.common.GoodInfo;
 import com.springapp.mvc.common.catalog.CatalogFilterInfo;
 import com.springapp.mvc.common.catalog.FilterItem;
 import com.springapp.mvc.common.catalog.PriceFilterItem;
+import com.springapp.mvc.repositories.CategoryRepository;
+import com.springapp.mvc.repositories.GoodRepository;
+import com.springapp.mvc.repositories.GoodRepositoryCustom;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,16 +30,20 @@ public class CatalogService {
      * @param categoryId id категории
      * @return список товаров
      */
+    @Autowired
+    private GoodRepository goodRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+//    @Autowired
+//    private GoodRepositoryCustom goodRepositoryCustom;
+
     public List<GoodInfo> getGoodsByCategoryId(Long categoryId) {
-        CategoryInfo category = new CategoryInfo(categoryId, "Dresses", null);
-        List<GoodInfo> goods = new ArrayList<GoodInfo>();
-        goods.add(new GoodInfo(1L, "Lorem 2014", "/images/p1.jpg", category, new BigDecimal(100)));
-        goods.add(new GoodInfo(2L, "Lorem 2015", "/images/p2.jpg", category, new BigDecimal(200)));
-        goods.add(new GoodInfo(3L, "Lorem 2016", "/images/p3.jpg", category, new BigDecimal(200)));
-        goods.add(new GoodInfo(4L, "Rolex 2015", "/images/p4.jpg", category, new BigDecimal(300)));
-        goods.add(new GoodInfo(5L, "Rolex 2016", "/images/p5.jpg", category, new BigDecimal(300)));
-        goods.add(new GoodInfo(6L, "OMEGA 2015", "/images/p6.jpg", category, new BigDecimal(250)));
-        return goods;
+//        CategoryInfo category = new CategoryInfo(categoryId, "Dresses", null);
+        return goodRepository.findGoodsByCategory(categoryRepository.findCategoryById(categoryId)) ;
+    }
+    public List<GoodInfo> getAllGoods() {
+        return goodRepository.findAllByNameNotNull();
     }
 
     /**

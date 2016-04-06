@@ -1,5 +1,6 @@
 package com.springapp.mvc.common;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -8,11 +9,15 @@ import java.util.List;
  * Gataullin Kamil
  * 27.02.2016 0:48
  */
+@Entity
+@Table(name = "h_categories")
 public class CategoryInfo {
 
     /**
      * id категории
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     /**
@@ -23,7 +28,16 @@ public class CategoryInfo {
     /**
      * Список дочерних категорий
      */
+
+    @OneToMany(mappedBy = "parent")
     private List<CategoryInfo> children;
+
+    /**
+     * Родительская категория
+     */
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private CategoryInfo parent;
 
     public CategoryInfo() {
     }
@@ -56,5 +70,13 @@ public class CategoryInfo {
 
     public void setChildren(List<CategoryInfo> children) {
         this.children = children;
+    }
+
+    public CategoryInfo getParent() {
+        return parent;
+    }
+
+    public void setParent(CategoryInfo parent) {
+        this.parent = parent;
     }
 }

@@ -1,8 +1,13 @@
 package com.springapp.mvc.controllers;
 
+import com.springapp.mvc.aspects.annotation.IncludeMenuInfo;
 import com.springapp.mvc.common.GoodInfo;
+import com.springapp.mvc.services.CatalogService;
+import com.springapp.mvc.services.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,14 +28,21 @@ public class GoodController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private GoodService goodService;
+
+    @Autowired
+    private CatalogService catalogService;
+
     /**
      * Отображение карточки товара
      *
      * @param goodId id товара
      */
+    @IncludeMenuInfo
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String renderGoodPage(@PathVariable("id") Long goodId) {
-        request.setAttribute("goodId", goodId);
+    public String renderGoodPage(@PathVariable("id") Long goodId,Model model) {
+        model.addAttribute("good", goodService.getGood(goodId));
         return "good/goodPage";
     }
 
@@ -40,8 +52,8 @@ public class GoodController {
      * @param goodId id товара
      */
     @ResponseBody
-    @RequestMapping(value = "/{id}", method = RequestMethod.POST)//, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public GoodInfo getFullInfo(@PathVariable("id") Long goodId) {
-        return new GoodInfo(goodId, "Mercedes-Benz", "The best or nothing", "imageUrl", null, null);
+        return goodService.getGood(goodId);
     }
 }
