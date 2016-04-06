@@ -20,7 +20,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- start menu -->
     <link href="/resources/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/resources/css/form.css" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="/resources/js/memenu.js"></script>
+    <script type="text/javascript" src="/resources/js/memenu.js" defer></script>
     <script>$(document).ready(function(){$(".memenu").memenu();});</script>
     <#list styles as css>
     <link rel="stylesheet" href="/resources/${css}" type="text/css" />

@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="Session.cart" type="com.springapp.mvc.common.CartInfo" -->
 <#include "../template/template.ftl">
-<@mainTemplate title="Корзина" styles=[]
+<@mainTemplate title="Корзина" styles=["css/own/catalog.css"]
 scripts=["js/own/cart.js"]/>
 <#macro m_body>
 <script src="/resources/js/jquery-ui.min.js"></script>
@@ -8,7 +8,7 @@ scripts=["js/own/cart.js"]/>
 <div class="container">
     <div class="check-sec">
         <div class="col-md-3 cart-total">
-            <a class="continue" href="/{">Continue to basket</a>
+            <a class="continue" href="#" onclick="window.history.back()">Continue to basket</a>
             <div class="price-details">
                 <h3>Price Details</h3>
                 <span>Total</span>
@@ -26,11 +26,6 @@ scripts=["js/own/cart.js"]/>
             <div class="clearfix"></div>
             <div class="clearfix"></div>
             <a class="order" href="#">Place Order</a>
-            <div class="total-item">
-                <h3>OPTIONS</h3>
-                <h4>COUPONS</h4>
-                <a class="cpns" href="#">Apply Coupons</a>
-            </div>
         </div>
         <div class="col-md-9 cart-items">
             <h1>Товары в корзине:</h1>
@@ -63,6 +58,15 @@ scripts=["js/own/cart.js"]/>
 
             <div class="clearfix"> </div>
             </div>
+</div>
+<div class="subscribe">
+    <div class="container">
+        <h3>Newsletter</h3>
+        <form>
+            <input type="text" class="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}">
+            <input type="submit" value="Subscribe">
+        </form>
+    </div>
 </div>
 </#macro>
 <#--<#if (fCart)??>-->

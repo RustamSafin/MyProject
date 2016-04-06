@@ -66,7 +66,7 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: '/good/' + $(this).data('id'),
-            //dataType: 'json',
+            dataType: 'json',
             success: function (data, status) {  // успешное завершение работы
                 alert(JSON.stringify(data, "", 4));
             },
