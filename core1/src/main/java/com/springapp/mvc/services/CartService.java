@@ -1,11 +1,15 @@
 package com.springapp.mvc.services;
 
 import com.springapp.mvc.common.CartInfo;
+import com.springapp.mvc.common.GoodInfo;
+import com.springapp.mvc.repositories.GoodRepository;
 import com.springapp.mvc.util.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +18,9 @@ import java.util.Map;
  */
 @Service
 public class CartService {
+
+    @Autowired
+    GoodRepository goodRepository;
 
 
     /**
@@ -41,10 +48,12 @@ public class CartService {
         CartInfo cart = (CartInfo) session.getAttribute(Constants.SESSION_CART);
         if (cart!=null) {
             cart.getGoods().remove(goodId);
-
         }
     }
     public CartInfo getCart (HttpSession session) {
         return (CartInfo) session.getAttribute("cart");
+    }
+    public GoodInfo getGood (Long goodId) {
+        return goodRepository.getGoodById(goodId);
     }
 }

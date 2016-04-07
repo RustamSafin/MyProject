@@ -32,18 +32,18 @@ scripts=["js/own/cart.js"]/>
             <#if (fCart)?? && (fCart?size!=0)>
                 <#list fCart?keys as goodId>
                 <div class="cart-header ${goodId}">
-                    <div class="close1" data-id="${goodId}"> </div>
+                    <div class="close1" data-id="${goodId}"></div>
                     <div class="cart-sec simpleCart_shelfItem">
                         <div class="cart-item cyc">
-                            <img src="/resources/images/p4.jpg" }" alt="" class="img-responsive">
+                            <img src="/resources/${goodsInCart[goodId].imageUrl}" alt="" class="img-responsive">
                         </div>
                         <div class="cart-item-info">
-                            <h3><a href="single.html">Товар ${goodId}</a><span>Model No: RL-5511S</span></h3>
+                            <h3><a href="/good/${goodId}">Товар: ${goodsInCart[goodId].name}</a><span>Номер товара: ${goodId}</span></h3>
                             <ul class="qty">
                                 <li>Количество:<input type="number" class="js_Change" data-id="${goodId}" value="${fCart[goodId]}" /></li>
                             </ul>
                             <div class="delivery">
-                                <p>Service Charges : Rs.100.00</p>
+                                <p>Price: ${goodsInCart[goodId].price*fCart[goodId]} $</p>
                                 <span>Delivered in 2-3 bussiness days</span>
                                 <div class="clearfix"></div>
                             </div>
