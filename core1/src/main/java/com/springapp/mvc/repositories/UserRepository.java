@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<UserInfo,Long> {
 //    void add(UserInfo userInfo);
 //
 //    UserInfo getUserByLogin(String login);
+
+    UserInfo getUserByLogin(String login);
 }

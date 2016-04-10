@@ -27,15 +27,16 @@ import java.util.List;
 @RequestMapping("/catalog")
 public class CatalogController {
 
-    private static final Integer TEST_GOODS_COUNT = 16;
     private static final Integer TEST_LIMIT = 6;
 
+    @Autowired
+    private HttpServletRequest request;
 
     @Autowired
     private CatalogService catalogService;
 
     /**
-     * Отображение каталога
+     * Отображение каталога для данной категории
      *
      * @param id    id категории
      * @param page  номер страницы
@@ -46,20 +47,39 @@ public class CatalogController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String renderCatalog(@PathVariable("id") Long id,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                Long limit,
+                                Integer limit,
                                 Model model) {
 
         List<GoodInfo> goods = catalogService.getGoodsByCategoryId(id);
         model.addAttribute("goods", goods);
 
-        CatalogFilterInfo catalogFilter = catalogService.getCatalogFilters(id);
+        CatalogFilterInfo catalogFilter = catalogService.getCatalogFilters();
         model.addAttribute("catalogFilter", catalogFilter);
 
         model.addAttribute("page", page);
         model.addAttribute("limit", limit == null ? TEST_LIMIT : limit);
-        model.addAttribute("goodsCount", TEST_GOODS_COUNT);
+        model.addAttribute("goodsCount", catalogService.countAllGoods());
         return "catalog/catalogPage";
     }
+    /**
+     * Отображение главной страницы каталога
+     */
+    @IncludeMenuInfo
+    @RequestMapping(method = RequestMethod.GET)
+    public String renderCatalogForAll(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+                                @RequestParam(required = false, defaultValue = "9") Integer limit,
+                                Model model) {
+        List<GoodInfo> goods = catalogService.getAllGoods();
+        model.addAttribute("goods",goods.subList(0,limit));
+        CatalogFilterInfo catalogFilter = catalogService.getCatalogFilters();
+        model.addAttribute("catalogFilter", catalogFilter);
+
+        model.addAttribute("page", page);
+        model.addAttribute("limit", limit == null ? TEST_LIMIT : limit);
+        model.addAttribute("goodsCount", catalogService.countAllGoods());
+        return "catalog/catalogPage";
+    }
+
     /**
      * Показать еще товары
      *
@@ -68,20 +88,20 @@ public class CatalogController {
      * @param limit кол-во отображаемых товаров
      */
     @RequestMapping(value = "/showMore", method = RequestMethod.POST)
-    public String showMoreGoods(Long id, Integer page, Integer limit, Model model) {
+    public String showMoreGoods(Integer page, Integer limit, Model model) {
+        System.out.println(page);
         // Эта страшная проверка с page и limit только для теста, так как у нас пока нет реальных данных
-        List<GoodInfo> goods = catalogService.getGoodsByCategoryId(id);
-        if (TEST_GOODS_COUNT + limit > page * limit)
-            model.addAttribute("goods", (TEST_GOODS_COUNT > page * limit) ? goods : goods.subList(0, TEST_GOODS_COUNT + limit - page * limit));
+        List<GoodInfo> goods = catalogService.getAllGoods();
+        model.addAttribute("goods",(catalogService.countAllGoods()>page*limit)? goods.subList((page-1)*limit,page*limit):goods.subList((page-1)*limit,catalogService.countAllGoods()));
+//        model.addAttribute("goods",(catalogService.countAllGoods()>page*limit)? goods.subList(limit*page-limit,limit*page):goods.subList(limit*(page-1),catalogService.countAllGoods()));
+//        if (TEST_GOODS_COUNT + limit > page * limit)
+//            model.addAttribute("goods", (TEST_GOODS_COUNT > page * limit) ? goods : goods.subList(0, TEST_GOODS_COUNT + limit - page * limit));
+
         return "catalog/ajaxGoods";
     }
+    @RequestMapping(value = "/find", method = RequestMethod.GET)
+    public String findGoodsByFilters() {
 
-    /**
-     * Отображение главной страницы каталога
-     */
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public String mainCatalog(HttpServletRequest request) {
-        request.setAttribute("message", "Главная страница каталога");
         return "catalog/catalogPage";
     }
 }

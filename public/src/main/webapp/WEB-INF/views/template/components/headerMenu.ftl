@@ -1,4 +1,5 @@
 <#-- @ftlvariable name="listMenu" type="java.util.List<com.springapp.mvc.common.MenuInfo>" -->
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"]>
 <div class="header-top">
     <div class="header-bottom">
         <div class="logo">
@@ -50,14 +51,38 @@
         </li>
         </#list>
     </ul>
-</div>
+        </div>
         <div class="cart box_1">
             <a href="/cart">
                 <img src="/resources/images/shop_cart.gif" class="img-responsive"/>
             </a>
             <div class="clearfix"> </div>
         </div>
+        <div class="reg-right">
+        <ul class="header_user_info">
+        <#-- Если пользователь еще не авторизован, предлагаем ему авторизоваться, либо зарегистрироваться на сайте -->
+        <@sec.authorize ifAnyGranted="ROLE_ANONYMOUS">
+            <a class="login" href="/login">Login</a> |
+            <a class="login" href="/reg">Registration</a>
+        </@sec.authorize>
+        <#-- Если уже авторизован, то ссылки в личный кабинет и на выход -->
+        <@sec.authorize access="isAuthenticated()">
+            <a class="login" href="/cabinet">
+                <i class="user"> </i>
+                <li class="user_desc">
+                <#-- principal - это фактически экземпляр объекта MyUserDetail -->
+                        <@sec.authentication property="principal.username" />
+                        <#--<@sec.authentication property="principal.userInfo.fio" />-->
+                </li>
+            </a>
+            <a class="login" href="/logout">
+                <li class="user_desc" style="padding-left: 10px;">Logout</li>
+            </a>
+        </@sec.authorize>
+            <div class="clearfix"></div>
+        </ul>
+            </div>
+
+
     </div>
-    <div class="clearfix"></div>
-</div>
 

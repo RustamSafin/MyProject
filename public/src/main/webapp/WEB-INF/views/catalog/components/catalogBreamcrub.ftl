@@ -4,7 +4,7 @@
             <a href="/" title="Go to Home Page">Home</a>
         </li>
         <li class="active">&nbsp;
-            Men / Women&nbsp;
+            Products&nbsp;
         </li>
     </ol>
     <div class="clearfix"></div>

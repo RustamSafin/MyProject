@@ -12,24 +12,25 @@ $(document).ready(function () {
             type: "POST",
             url: "/catalog/showMore",
             data: {
-                id: $this.data('id'),
+                //id: $this.data('id'),
                 page: page,
                 limit: limit
             }
         }).done(function (data) {  // сюда приходит ответ при успехе
             //console.log(data);
-            if (data != '') {
+            //if (data != '') {
                 $("#goodList").append(data);
                 updateCounter();
-            } else {
-                $this.hide();
-            }
-        }).fail(function () {      // сюда приходит ответ если на сервере прооизошла ошибка
-            $this.hide();
+            //} else {
+            //    $this.hide();
+            //}
+        }).fail(function () {// сюда приходит ответ если на сервере прооизошла ошибка
+            //$this.hide();
+            alert("upal v oshibku");
         });
 
         function updateCounter() {
-            $this.data('page', page + 1);
+            $this.data('page', page + 1).attr('data-page',page+1);
             var $goodsCount = $('#goodsCount');
             var goodsCount = parseInt($goodsCount.text());
             if (goodsCount > limit) {
@@ -75,5 +76,12 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on('click','forms.search',function () {
+        var $this= $(this);
+        if(document.forms.search.brand.checked==true) {
+        }
+        $.ajax({
 
+        })
+    })
 });

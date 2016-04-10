@@ -11,6 +11,7 @@ import com.springapp.mvc.repositories.GoodRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class CatalogService {
      * @param categoryId id категории
      * @return список товаров
      */
+
     @Autowired
     private GoodRepository goodRepository;
 
@@ -46,67 +48,36 @@ public class CatalogService {
         return goodRepository.findAllByNameNotNull();
     }
 
+    public Integer countAllGoods() {
+       return goodRepository.countAllGoods();
+    }
     /**
      * Получаем продвигаемые товары для главной
      */
     public List<GoodInfo> getTopGoodsForMain() {
-        CategoryInfo category = new CategoryInfo(1L, "Watches", null);
-        List<GoodInfo> goods = new ArrayList<GoodInfo>();
-        goods.add(new GoodInfo(1L, "Men's", "Lorem ipsum dolor sit amet consectetur adipisicing.",
-                "/images/p1.jpg", category, new BigDecimal(100)));
-        goods.add(new GoodInfo(2L, "Men's", "Lorem ipsum dolor sit amet consectetur adipisicing.",
-                "/images/p2.jpg", category, new BigDecimal(200)));
-        goods.add(new GoodInfo(3L, "Women's", "Lorem ipsum dolor sit amet consectetur adipisicing.",
-                "/images/p3.jpg", category, new BigDecimal(200)));
-        return goods;
+        return goodRepository.findAllByNameNotNull().subList(0,8);
     }
 
     /**
      * Получаем значения фильтров для каталога
      *
-     * @param categoryId id категории
      */
-    public CatalogFilterInfo getCatalogFilters(Long categoryId) {
+    public CatalogFilterInfo getCatalogFilters() {
         CatalogFilterInfo filterInfo = new CatalogFilterInfo();
-        List<FilterItem> categories = new ArrayList<FilterItem>();
-        categories.add(new FilterItem(11L, "Dresses", 14));
-        categories.add(new FilterItem(12L, "Glasses", 2));
-        categories.add(new FilterItem(13L, "Gloves", 2));
-        categories.add(new FilterItem(14L, "Jeans", 8));
-        categories.add(new FilterItem(15L, "Shoes", 11));
-        categories.add(new FilterItem(16L, "Shorts", 3));
-        categories.add(new FilterItem(17L, "Skirts", 3));
-        categories.add(new FilterItem(18L, "Sweaters", 6));
-        categories.add(new FilterItem(19L, "T-Shirts", 12));
-        categories.add(new FilterItem(10L, "Tops", 6));
-        categories.add(new FilterItem(20L, "Watchers", 5));
-        categories.add(new FilterItem(21L, "Women", 17));
+        List<CategoryInfo> categories =categoryRepository.findAllByNameNotNull();
         filterInfo.setCategories(categories);
 
-        List<FilterItem> colors = new ArrayList<FilterItem>();
-        colors.add(new FilterItem(11L, "Green", 14));
-        colors.add(new FilterItem(12L, "Blue", 2));
-        colors.add(new FilterItem(13L, "Red", 2));
-        colors.add(new FilterItem(14L, "Gray", 8));
-        colors.add(new FilterItem(15L, "Black", 11));
-        filterInfo.setColors(colors);
+        List<String> brands = new ArrayList<String>();
+        brands.add("A");
+
+        filterInfo.setBrands(brands);
 
         List<FilterItem> sizes = new ArrayList<FilterItem>();
-        sizes.add(new FilterItem(11L, "L", 14));
-        sizes.add(new FilterItem(12L, "M", 2));
-        sizes.add(new FilterItem(13L, "S", 2));
-        sizes.add(new FilterItem(14L, "XL", 8));
-        sizes.add(new FilterItem(15L, "XS", 11));
+        sizes.add(new FilterItem(1L, "Mini: 12 in. wide and less"));
+        sizes.add(new FilterItem(2L, "Small: 13-22 in. wide"));
+        sizes.add(new FilterItem(3L, "Medium: 23-30 in. wide"));
+        sizes.add(new FilterItem(4L, "Large: 31-50 in. wide"));
         filterInfo.setSizes(sizes);
-
-        List<PriceFilterItem> prices = new ArrayList<PriceFilterItem>();
-        prices.add(new PriceFilterItem(new BigDecimal(100), new BigDecimal(150), 15));
-        prices.add(new PriceFilterItem(new BigDecimal(150), new BigDecimal(200), 16));
-        prices.add(new PriceFilterItem(new BigDecimal(200), new BigDecimal(250), 3));
-        prices.add(new PriceFilterItem(new BigDecimal(250), new BigDecimal(300), 8));
-        prices.add(new PriceFilterItem(new BigDecimal(300), new BigDecimal(350), 7));
-        prices.add(new PriceFilterItem(new BigDecimal(350), new BigDecimal(400), 1));
-        filterInfo.setPrices(prices);
 
         return filterInfo;
     }

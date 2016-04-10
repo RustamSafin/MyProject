@@ -1,5 +1,7 @@
+<#--@ftlvariable name="good" type="com.springapp.mvc.common.GoodInfo"-->
 <#macro goodItem good itemClass="">
- <#--@ftlvariable name="good" type="com.springapp.mvc.common.GoodInfo"-->
+<script src="/resources/js/jquery-ui.min.js"></script>
+<script src="/resources/js/jquery.min.js"></script>
 <li >
     <a href="/good/${good.id}">
         <div class="product-grid">
@@ -23,7 +25,7 @@
          <a class="button item_add cbp-vm-icon cbp-vm-add js_addToCart" data-id="${good.id}" href="/cart">Add to cart</a>
          </ul>
      </div>
-    </div>
 </div>
+
 </li>
 </#macro>

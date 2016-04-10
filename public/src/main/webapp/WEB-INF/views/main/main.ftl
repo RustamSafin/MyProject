@@ -47,145 +47,56 @@
 <script src="/resources/js/bootstrap.js"> </script>
 <div class="items">
     <div class="container">
-        <div class="items-sec">
+    <div class="items-sec">
+    <#list topGoods as topGood>
             <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img1.jpg" alt=""/>
+                <a href="good/${topGood.id}"><img src="/resources/${topGood.imageUrl}" alt=""/>
                     <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 12000</p>
-                        <span class="pric1"><del>Rs 18000</del></span>
-                        <span class="disc">[12% Off]</span>
+                        <h4>${topGood.name}</h4>
+                        <p>${topGood.id}</p>
+                        <span class="pric1">${topGood.price}$</span>
+                        <span class="disc">${topGood.description}</span>
                     </div>
                     <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
+                        <a href="/good/${topGood.id}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
                     </div>
                 </a>
             </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img2.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 10000</p>
-                        <span class="pric1"><del>Rs 14000</del></span>
-                        <span class="disc">[14% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img3.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 8500</p>
-                        <span class="pric1"><del>Rs 9500</del></span>
-                        <span class="disc">[10% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img4.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 12000</p>
-                        <span class="pric1"><del>Rs 18000</del></span>
-                        <span class="disc">[12% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="items-sec btm-sec">
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img5.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 500</p>
-                        <span class="pric1"><del>Rs 650</del></span>
-                        <span class="disc">[8% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img8.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 400</p>
-                        <span class="pric1"><del>Rs 750</del></span>
-                        <span class="disc">[12% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img7.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 800</p>
-                        <span class="pric1"><del>Rs 1200</del></span>
-                        <span class="disc">[12% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 feature-grid">
-                <a href="product.html"><img src="/resources/images/img6.jpg" alt=""/>
-                    <div class="arrival-info">
-                        <h4>Lighting #1</h4>
-                        <p>Rs 600</p>
-                        <span class="pric1"><del>Rs 1200</del></span>
-                        <span class="disc">[50% Off]</span>
-                    </div>
-                    <div class="viw">
-                        <a href="product.html"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>View</a>
-                    </div>
-                </a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+
+    </#list>
+        <div class="clearfix"></div>
+    </div>
     </div>
 </div>
+
 <div class="offers">
     <div class="container">
-        <h3>End of Season Sale</h3>
+        <h3>Most popular</h3>
         <div class="offer-grids">
             <div class="col-md-6 grid-left">
-                <a href="#"><div class="offer-grid1">
-                    <div class="ofr-pic">
-                        <img src="/resources/images/ofr2.jpeg" class="img-responsive" alt=""/>
+                <a href="/good/${topGoods[3].id}"><div class="offer-grid1">
+                    <div class="ofr-pic-info2">
+                        <h4>${topGoods[3].name}</h4>
+                        <span>${topGoods[3].id}</span>
+                        <h5>${topGoods[3].description}</h5>
+                        <p href="/good/${topGoods[3].id}">Shop Now</p>
                     </div>
-                    <div class="ofr-pic-info">
-                        <h4>Emergency Lights <br>& Led Bulds</h4>
-                        <span>UP TO 60% OFF</span>
-                        <p>Shop Now</p>
+                    <div class="ofr-pic2">
+                        <img src="/resources/${topGoods[3].imageUrl}" class="img-responsive" alt=""/>
                     </div>
                     <div class="clearfix"></div>
                 </div></a>
             </div>
             <div class="col-md-6 grid-right">
-                <a href="#"><div class="offer-grid2">
+                <a href="/good/${topGoods[2].id}"><div class="offer-grid1">
                     <div class="ofr-pic-info2">
-                        <h4>Flat Discount</h4>
-                        <span>UP TO 30% OFF</span>
-                        <h5>Outdoor Gate Lights</h5>
-                        <p>Shop Now</p>
+                        <h4>${topGoods[2].name}</h4>
+                        <span>${topGoods[2].id}</span>
+                        <h5>${topGoods[2].description}</h5>
+                        <p href="/good/${topGoods[2].id}">Shop Now</p>
                     </div>
-                    <div class="ofr-pic2">
-                        <img src="/resources/images/ofr3.jpg" class="img-responsive" alt=""/>
+                    <div class="ofr-pic">
+                        <img src="/resources/${topGoods[2].imageUrl}" class="img-responsive" alt=""/>
                     </div>
                     <div class="clearfix"></div>
                 </div></a>

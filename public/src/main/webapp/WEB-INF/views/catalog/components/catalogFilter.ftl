@@ -3,7 +3,7 @@
 <div class="rsidebar span_1_of_left">
     <section  class="sky-form">
         <div class="product_right">
-
+            <form name="search" method="get" action="">
             <div class="tab1">
                 <ul class="place">
                     <li class="sort"><h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Categories</h4></li>
@@ -13,21 +13,25 @@
                 <div class="single-bottom">
                     <ul>
                         <#list catalogFilter.categories as category>
-                            <li class="cat-item cat-item-${category.id}"><a href="#">${category.name}</a> <span class="count">(${category.count})</span></li>
+                            <#list category.children as child>
+                                <#if child.id!=category.id>
+                                    <li class="cat-item cat-item-${category.id}"><input type="checkbox" name="category"/> ${child.name}</li>
+                                </#if>
+                            </#list>
                         </#list>
                     </ul>
                 </div>
             </div>
             <div class="tab2">
                 <ul class="place">
-                    <li class="sort"><h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Colors</h4></li>
+                    <li class="sort"><h4 class="m_2"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span>Brands</h4></li>
                     <li class="by"><img src="/resources/images/do.png" alt=""></li>
                     <div class="clearfix"> </div>
                 </ul>
                 <div class="single-bottom">
                     <ul>
-                        <#list catalogFilter.colors as color>
-                            <li class="cat-item cat-item-${color.id}"><a href="#">${color.name}</a> <span class="count">(${color.count})</span></li>
+                        <#list catalogFilter.brands as brand>
+                            <li class="cat-item cat-item-"><input type="checkbox" name="brand"/> ${brand}</li>
                         </#list>
                     </ul>
                 </div>
@@ -41,7 +45,7 @@
                 <div class="single-bottom">
                    <ul>
                        <#list catalogFilter.sizes as size>
-                           <li class="cat-item cat-item-${size.id}"><a href="#">${size.name}</a> <span class="count">(${size.count})</span></li>
+                           <li class="cat-item cat-item-${size.id}"><input type="checkbox" name="size"/> ${size.name}</li>
                        </#list>
                    </ul>
                 </div>
@@ -53,19 +57,14 @@
                     <div class="clearfix"> </div>
                 </ul>
                 <div class="single-bottom">
-                    <ul>
-                        <#list catalogFilter.prices as price>
-                            <li class="cat-item"><a href="#">${price.minPrice}$-${price.maxPrice}$</a> <span class="count">(${price.count})</span></li>
-                        </#list>
-                    </ul>
-                    <ul class="dropdown-menu1">
-                        <li><a href="">
-                            <div id="slider-range"></div>
-                            <input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Dosis-Regular';" />
-                        </a></li>
-                    </ul>
+                        <ul>
+                            <li><input type="number" name="min" value="0">$</li>
+                            <li><input type="number" name="max" value="800">$</li>
+                        </ul>
                 </div>
             </div>
+                <input type="submit" class="button" value="Find"/>
+            </form>
             <!---->
             <script type="text/javascript" src="/resources/js/jquery-ui.min.js"></script>
             <link rel="stylesheet" type="text/css" href="/resources/css/jquery-ui.css">
@@ -110,3 +109,14 @@
             <!-- script -->
     </section>
 </#macro>
+<#--<ul>-->
+<#--<#list catalogFilter.prices as price>-->
+<#--<li class="cat-item"><a href="#">${price.minPrice}$-${price.maxPrice}$</a> <span class="count">(${price.count})</span></li>-->
+<#--</#list>-->
+<#--</ul>-->
+<#--<ul class="dropdown-menu1">-->
+<#--<li><a href="">-->
+<#--<div id="slider-range"></div>-->
+<#--<input type="text" id="amount" style="border: 0; font-weight: NORMAL;   font-family: 'Dosis-Regular';" />-->
+<#--</a></li>-->
+<#--</ul>-->

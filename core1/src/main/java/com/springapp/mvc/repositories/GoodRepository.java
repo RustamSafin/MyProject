@@ -19,4 +19,7 @@ public interface GoodRepository extends JpaRepository<GoodInfo,Long> {
     List<GoodInfo> findByPriceGreaterThanEqual(BigDecimal price);
     List<GoodInfo> findGoodsByCategory(CategoryInfo categoryInfo);
     List<GoodInfo> findAllByNameNotNull();
+
+    @Query("select count(g) from GoodInfo g")
+    Integer countAllGoods();
 }

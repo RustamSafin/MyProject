@@ -31,10 +31,9 @@ public class MenuService {
      */
     public List<MenuInfo> getMainMenu() {
         List<MenuInfo> listMenu = new ArrayList<MenuInfo>();
-        listMenu.add(new MenuInfo(1L, "Products", "#", getCategoriesForMenu(), getTrendsForMenu()));
-        listMenu.add(new MenuInfo(2L, "Products2", "#", getCategoriesForMenu(), getTrendsForMenu()));
-        listMenu.add(new MenuInfo(3L, "Brands", "#", null, null));
-        listMenu.add(new MenuInfo(4L, "Sale", "#", null, null));
+        listMenu.add(new MenuInfo(1L, "Products", "/catalog", getCategoriesForMenu(), getTrendsForMenu()));
+        listMenu.add(new MenuInfo(2L, "Brands", "#", null, null));
+        listMenu.add(new MenuInfo(3L, "Sale", "#", null, null));
         return listMenu;
     }
 

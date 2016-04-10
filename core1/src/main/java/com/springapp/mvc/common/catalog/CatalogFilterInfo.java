@@ -1,5 +1,7 @@
 package com.springapp.mvc.common.catalog;
 
+import com.springapp.mvc.common.CategoryInfo;
+
 import java.util.List;
 
 /**
@@ -13,12 +15,12 @@ public class CatalogFilterInfo {
     /**
      * Фильтры по категории
      */
-    private List<FilterItem> categories;
+    private List<CategoryInfo> categories;
 
     /**
      * Фильтры по цвету
      */
-    private List<FilterItem> colors;
+    private List<String> brands;
 
     /**
      * Фильтры по размеру
@@ -28,32 +30,32 @@ public class CatalogFilterInfo {
     /**
      * Фильтры по цене
      */
-    private List<PriceFilterItem> prices;
+//    private List<PriceFilterItem> prices;
 
     public CatalogFilterInfo() {
     }
 
-    public CatalogFilterInfo(List<FilterItem> categories, List<FilterItem> colors, List<FilterItem> sizes, List<PriceFilterItem> prices) {
+    public CatalogFilterInfo(List<CategoryInfo> categories, List<String> brands, List<FilterItem> sizes) {
         this.categories = categories;
-        this.colors = colors;
+        this.brands = brands;
         this.sizes = sizes;
-        this.prices = prices;
+//        this.prices = prices;
     }
 
-    public List<FilterItem> getCategories() {
+    public List<CategoryInfo> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<FilterItem> categories) {
+    public void setCategories(List<CategoryInfo> categories) {
         this.categories = categories;
     }
 
-    public List<FilterItem> getColors() {
-        return colors;
+    public List<String> getBrands() {
+        return brands;
     }
 
-    public void setColors(List<FilterItem> colors) {
-        this.colors = colors;
+    public void setBrands(List<String> brands) {
+        this.brands = brands;
     }
 
     public List<FilterItem> getSizes() {
@@ -64,11 +66,4 @@ public class CatalogFilterInfo {
         this.sizes = sizes;
     }
 
-    public List<PriceFilterItem> getPrices() {
-        return prices;
-    }
-
-    public void setPrices(List<PriceFilterItem> prices) {
-        this.prices = prices;
-    }
 }

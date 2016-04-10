@@ -18,18 +18,12 @@ public class FilterItem {
      */
     private String name;
 
-    /**
-     * Кол-во подходящих товаров
-     */
-    private Integer count;
-
     public FilterItem() {
     }
 
-    public FilterItem(Long id, String name, Integer count) {
+    public FilterItem(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.count = count;
     }
 
     public Long getId() {
@@ -48,11 +42,4 @@ public class FilterItem {
         this.name = name;
     }
 
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
 }

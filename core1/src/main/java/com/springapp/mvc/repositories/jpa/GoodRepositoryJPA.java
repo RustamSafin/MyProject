@@ -2,6 +2,7 @@ package com.springapp.mvc.repositories.jpa;
 
 import com.springapp.mvc.common.GoodInfo;
 import com.springapp.mvc.repositories.GoodRepositoryCustom;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -28,4 +29,5 @@ public class GoodRepositoryJPA implements GoodRepositoryCustom {
         query.where(cb.equal(sm.get("category_id"),id));
         return entityManager.createQuery(query).getResultList();
     }
+
 }

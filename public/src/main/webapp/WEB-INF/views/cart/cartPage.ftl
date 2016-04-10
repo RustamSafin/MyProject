@@ -14,7 +14,7 @@ scripts=["js/own/cart.js"]/>
                 <span>Total</span>
                 <span class="total1">6200.00</span>
                 <span>Discount</span>
-                <span class="total1">10%(Festival Offer)</span>
+                <span class="total1">No</span>
                 <span>Delivery Charges</span>
                 <span class="total1">150.00</span>
                 <div class="clearfix"></div>
@@ -43,7 +43,7 @@ scripts=["js/own/cart.js"]/>
                                 <li>Количество:<input type="number" class="js_Change" data-id="${goodId}" value="${fCart[goodId]}" /></li>
                             </ul>
                             <div class="delivery">
-                                <p>Price: ${goodsInCart[goodId].price*fCart[goodId]} $</p>
+                                <p>Price: ${goodsInCart[goodId].price} $</p>
                                 <span>Delivered in 2-3 bussiness days</span>
                                 <div class="clearfix"></div>
                             </div>
