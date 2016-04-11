@@ -16,7 +16,7 @@
         <p>Welcome, please enter the folling to continue.</p>
         <form name="authForm" id="authForm" action="/j_spring_security_check" method="post">
             <div>
-                <h5>Email*</h5>
+                <h5>Login*</h5>
                 <input type="text" name="j_username" />
             </div>
             <div>

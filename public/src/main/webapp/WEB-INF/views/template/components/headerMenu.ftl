@@ -68,15 +68,12 @@
         <#-- Если уже авторизован, то ссылки в личный кабинет и на выход -->
         <@sec.authorize access="isAuthenticated()">
             <a class="login" href="/cabinet">
-                <i class="user"> </i>
-                <li class="user_desc">
                 <#-- principal - это фактически экземпляр объекта MyUserDetail -->
                         <@sec.authentication property="principal.username" />
                         <#--<@sec.authentication property="principal.userInfo.fio" />-->
-                </li>
-            </a>
+            </a> |
             <a class="login" href="/logout">
-                <li class="user_desc" style="padding-left: 10px;">Logout</li>
+                Logout
             </a>
         </@sec.authorize>
             <div class="clearfix"></div>

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,7 +29,6 @@ import java.util.List;
 @RequestMapping("/catalog")
 public class CatalogController {
 
-    private static final Integer TEST_LIMIT = 6;
 
     @Autowired
     private HttpServletRequest request;
@@ -47,7 +48,7 @@ public class CatalogController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String renderCatalog(@PathVariable("id") Long id,
                                 @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                Integer limit,
+                                @RequestParam(required = false, defaultValue = "9") Integer limit,
                                 Model model) {
 
         List<GoodInfo> goods = catalogService.getGoodsByCategoryId(id);
@@ -57,7 +58,7 @@ public class CatalogController {
         model.addAttribute("catalogFilter", catalogFilter);
 
         model.addAttribute("page", page);
-        model.addAttribute("limit", limit == null ? TEST_LIMIT : limit);
+        model.addAttribute("limit", limit);
         model.addAttribute("goodsCount", catalogService.countAllGoods());
         return "catalog/catalogPage";
     }
@@ -66,7 +67,7 @@ public class CatalogController {
      */
     @IncludeMenuInfo
     @RequestMapping(method = RequestMethod.GET)
-    public String renderCatalogForAll(@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
+    public String renderCatalogForAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                                 @RequestParam(required = false, defaultValue = "9") Integer limit,
                                 Model model) {
         List<GoodInfo> goods = catalogService.getAllGoods();
@@ -75,7 +76,7 @@ public class CatalogController {
         model.addAttribute("catalogFilter", catalogFilter);
 
         model.addAttribute("page", page);
-        model.addAttribute("limit", limit == null ? TEST_LIMIT : limit);
+        model.addAttribute("limit", limit);
         model.addAttribute("goodsCount", catalogService.countAllGoods());
         return "catalog/catalogPage";
     }
@@ -88,20 +89,29 @@ public class CatalogController {
      * @param limit кол-во отображаемых товаров
      */
     @RequestMapping(value = "/showMore", method = RequestMethod.POST)
-    public String showMoreGoods(Integer page, Integer limit, Model model) {
-        System.out.println(page);
+    public String showMoreGoods(Integer page, Integer limit, Model model,@RequestParam(value ="sort",required = false,defaultValue = "") String sort) { //@RequestParam(value ="sort",required = false,defaultValue = "") String sort
         // Эта страшная проверка с page и limit только для теста, так как у нас пока нет реальных данных
-        List<GoodInfo> goods = catalogService.getAllGoods();
+        List<GoodInfo> goods = catalogService.getSortedGoods(sort);
         model.addAttribute("goods",(catalogService.countAllGoods()>page*limit)? goods.subList((page-1)*limit,page*limit):goods.subList((page-1)*limit,catalogService.countAllGoods()));
-//        model.addAttribute("goods",(catalogService.countAllGoods()>page*limit)? goods.subList(limit*page-limit,limit*page):goods.subList(limit*(page-1),catalogService.countAllGoods()));
-//        if (TEST_GOODS_COUNT + limit > page * limit)
-//            model.addAttribute("goods", (TEST_GOODS_COUNT > page * limit) ? goods : goods.subList(0, TEST_GOODS_COUNT + limit - page * limit));
-
         return "catalog/ajaxGoods";
     }
+    @RequestMapping(value = "/sort", method = RequestMethod.GET)
+    public String sortGoods(
+            Model model,@RequestParam(value ="sort",required = false,defaultValue = "") String sort, @RequestParam(required = false,defaultValue = "9") Integer limit,
+                            @RequestParam(value = "page",defaultValue = "1") Integer page) {
+        List<GoodInfo> goods= catalogService.getSortedGoods(sort);
+//        if (id==null) {
+//            goods = catalogService.getSortedGoods(sort);
+//        } else {
+//            goods =catalogService.getSortedGoods(id,sort);
+//        }
+        model.addAttribute("goods",goods.subList((page-1)*limit,page*limit));
+        return "catalog/sortedGoods";
+    }
     @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public String findGoodsByFilters() {
-
-        return "catalog/catalogPage";
+    public String findGoodsByFilter(Model model,@RequestParam(value = "categories",required = false,defaultValue = "") String categories,String brands,BigDecimal minPrice,BigDecimal maxPrice, @RequestParam(required = false,defaultValue = "9") Integer limit,
+                                    @RequestParam(value = "page",defaultValue = "1") Integer page) {
+        List<GoodInfo> goods = catalogService.
+        return "catalog/sortedGoods";
     }
 }

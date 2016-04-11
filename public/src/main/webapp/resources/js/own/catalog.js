@@ -18,15 +18,15 @@ $(document).ready(function () {
             }
         }).done(function (data) {  // сюда приходит ответ при успехе
             //console.log(data);
-            //if (data != '') {
+            if (data != '') {
                 $("#goodList").append(data);
                 updateCounter();
-            //} else {
-            //    $this.hide();
-            //}
+            } else {
+                $this.hide();
+            }
         }).fail(function () {// сюда приходит ответ если на сервере прооизошла ошибка
-            //$this.hide();
-            alert("upal v oshibku");
+            $this.hide();
+
         });
 
         function updateCounter() {
@@ -76,12 +76,53 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on('click','forms.search',function () {
-        var $this= $(this);
-        if(document.forms.search.brand.checked==true) {
-        }
+    $(document).on('click', '.js_Sort', function() {
+        var $this=$(this);
+        var sort=$(this).data('sort');
         $.ajax({
-
+            type: 'GET',
+            url: '/catalog/sort',
+            data: {
+                sort:sort
+            },
+            success: function (data) {  // успешное завершение работы
+                //console.log('/catalog/ result: data=' + data + '; status=' + status);
+                $('#goodList').remove();
+                $('.goods').append(data);
+            },
+            error: function () {    // На сервере произошла ошибка
+                alert('Приносим извинения.<br/>На сервере произошла ошибка');
+            }
         })
+    });
+    $(document).on('click','.find',function() {
+        var sizes='';
+        var brands='';
+        var minPrice=$('.minPrice').val();
+        var maxPrice=$('.maxPrice').val();
+        $('.js_Size').each(function() {
+            sizes+=$(this).val()+',';
+        });
+        $('.js_Brand').each(function() {
+            brands+=$(this).val()+',';
+        });
+        $.ajax({
+            type: 'GET',
+            url: 'catalog/find',
+            data: {
+                sizes:sizes,
+                brands:brands,
+                minPrice:minPrice,
+                maxPrice:maxPrice
+            },
+            success: function (data) {  // успешное завершение работы
+                //console.log('/catalog/ result: data=' + data + '; status=' + status);
+                $('#goodList').remove();
+                $('.goods').append(data);
+            },
+            error: function () {    // На сервере произошла ошибка
+                alert('Приносим извинения.<br/>На сервере произошла ошибка');
+            }
+        });
     })
 });

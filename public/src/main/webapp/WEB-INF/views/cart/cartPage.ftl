@@ -25,7 +25,7 @@ scripts=["js/own/cart.js"]/>
             </ul>
             <div class="clearfix"></div>
             <div class="clearfix"></div>
-            <a class="order" href="#">Place Order</a>
+            <a class="order" href="/order">Place Order</a>
         </div>
         <div class="col-md-9 cart-items">
             <h1>Товары в корзине:</h1>

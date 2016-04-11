@@ -11,11 +11,9 @@
         <div class="sort" align="right">
             <div class="sort-by">
                 <label>Sort By</label>
-                <select>
-                    <option value="">Name</option>
-                    <option value="">Price(High to Low)</option>
-                    <option value="">Price(Low to High)</option>
-                </select>
+                <button class="js_Sort" data-sort="name">Name</button>
+                <button class="js_Sort" data-sort="price">Price</button>
+                <button class="js_Sort" data-sort="price Desc">Price DESC</button>
             </div>
         </div>
         <div>
@@ -24,11 +22,13 @@
         </div>
         <div class="col-md-9 product-model-sec">
             <#include "components/goodItem.ftl">
-            <ul id="goodList">
-                <#list goods as good>
-                    <@goodItem good=good itemClass=((good_index+1)%3==0)?string("last", "") />
-                </#list>
-            </ul>
+            <div class="goods">
+                <ul id="goodList">
+                    <#list goods as good>
+                      <@goodItem good=good itemClass=((good_index+1)%3==0)?string("last", "") />
+                    </#list>
+                </ul>
+            </div>
             <#if limit < goodsCount && !id?has_content>
             <div id="showMore" class="col-md-9 product-model-sec show-more-button" data-page="${page+1}" data-limit="${limit}">
                 Показать еще (<span id="limit">${limit}</span>) из <span id="goodsCount">${goodsCount-limit}</span>
