@@ -35,14 +35,21 @@ public class UserInfo {
     /**
      * Уникальный ключ для подтверждения пользователя, отправляется по почте
      */
-    private String key;
+    private String email;
 
     /**
      * Флаг, что пользователь подтвержден и активен.
      */
     private Boolean enabled;
 
-    public UserInfo() {
+    public UserInfo(){}
+
+    public UserInfo(String fio,String login,String email,String hashPassword,String role) {
+        this.fio=fio;
+        this.login=login;
+        this.email=email;
+        this.hashPassword=hashPassword;
+        this.role=role;
     }
 
     public Long getId() {
@@ -85,13 +92,11 @@ public class UserInfo {
         this.role = role;
     }
 
-    public String getKey() {
-        return key;
+    public String getEmail() {
+        return email;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+    public void setEmail(String email) {this.email = email;}
 
     public Boolean getEnabled() {
         return enabled;

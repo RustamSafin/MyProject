@@ -111,7 +111,7 @@ public class CatalogController {
     @RequestMapping(value = "/find", method = RequestMethod.GET)
     public String findGoodsByFilter(Model model,@RequestParam(value = "categories",required = false,defaultValue = "") String categories,String brands,BigDecimal minPrice,BigDecimal maxPrice, @RequestParam(required = false,defaultValue = "9") Integer limit,
                                     @RequestParam(value = "page",defaultValue = "1") Integer page) {
-        List<GoodInfo> goods = catalogService.
+        //List<GoodInfo> goods = catalogService.findGoodsByFiltres()
         return "catalog/sortedGoods";
     }
 }

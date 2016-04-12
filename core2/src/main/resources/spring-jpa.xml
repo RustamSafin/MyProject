@@ -17,12 +17,10 @@
        <jpa:repositories base-package="com.springapp.mvc.repositories" />
 
        <!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
-       <tx:annotation-driven transaction-manager="jpaTransactionManager" />
-
        <!-- Менеджер транзакций -->
-       <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+       <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
              p:entityManagerFactory-ref="entityManagerFactory" />
-
+       <tx:annotation-driven transaction-manager="transactionManager" />
        <bean id="hibernatePersistenceProvider" class="org.hibernate.jpa.HibernatePersistenceProvider"/>
 
        <!-- Create default configuration for Hibernate -->
@@ -57,5 +55,4 @@
                      </props>
               </property>
        </bean>
-
 </beans>

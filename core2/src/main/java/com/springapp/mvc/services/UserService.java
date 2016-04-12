@@ -22,4 +22,7 @@ public class UserService {
     public UserInfo getUserByLogin(String login) {
         return userRepository.getUserByLogin(login);
     }
+    public UserInfo getUserById (Long id) { return userRepository.getUserById(id);}
+    @Transactional
+    public void update(UserInfo userInfo) {userRepository.saveAndFlush(userInfo);}
 }

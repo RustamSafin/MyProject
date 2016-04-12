@@ -31,8 +31,8 @@ public interface GoodRepository extends JpaRepository<GoodInfo,Long> {
     List<GoodInfo> findByCategoryOrderByPriceDesc(CategoryInfo categoryInfo);
     List<GoodInfo> findByCategoryOrderByName(CategoryInfo categoryInfo);
 
-    @Query("select g from GoodInfo g where g.brand in (:brand) and g.size in (:size) and g.price=:price")
-    List<GoodInfo> findGoodsByFiltres(@Param("brand") String brand,@Param("size") String size,@Param("price") BigDecimal price,);
-    @Query("select g from GoodInfo g where g.brand in (:brand)")
-    List<GoodInfo> findGoodsByFiltres(@Param("brand") String brand);
+//    @Query("select g from GoodInfo g where g.brand in (:brand) and g.size in (:size) and g.price=:price")
+//    List<GoodInfo> findGoodsByFiltres(@Param("brand") String brand,@Param("size") String size,@Param("price") BigDecimal price);
+//    @Query("select g from GoodInfo g where g.brand in (:brand)")
+//    List<GoodInfo> findGoodsByFiltres(@Param("brand") String brand);
 }

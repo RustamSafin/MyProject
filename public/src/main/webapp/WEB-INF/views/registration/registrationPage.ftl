@@ -19,6 +19,14 @@
                     <@form.errors path="fio" cssStyle="color: red;" />
                 </div>
                 <div>
+                    <span>Email<label>*</label></span>
+                    <@form.input path="email" />
+                    <@form.errors path="email" cssStyle="color: red;" />
+                </div>
+                <div>
+                    <#if loginErr?? && loginErr>
+                    <h2 style="color: red">Login already in use!</h2>
+                    </#if>
                     <span>Login<label>*</label></span>
                     <@form.input path="login" />
                     <@form.errors path="login" cssStyle="color: red;" />

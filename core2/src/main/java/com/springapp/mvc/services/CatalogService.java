@@ -4,14 +4,11 @@ import com.springapp.mvc.common.CategoryInfo;
 import com.springapp.mvc.common.GoodInfo;
 import com.springapp.mvc.common.catalog.CatalogFilterInfo;
 import com.springapp.mvc.common.catalog.FilterItem;
-import com.springapp.mvc.common.catalog.PriceFilterItem;
 import com.springapp.mvc.repositories.CategoryRepository;
 import com.springapp.mvc.repositories.GoodRepository;
-import com.springapp.mvc.repositories.GoodRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +101,8 @@ public class CatalogService {
 //        return goodRepository.findGoodsByCategory(categoryRepository.findCategoryById(categoryId)) ;
 //    }
     public List<GoodInfo> findGoodsByFiltres(String sizes,String brands,BigDecimal minPrice,BigDecimal maxPrice){
-        categories=categories.substring(0,sizes.length()-1);
+        sizes=sizes.substring(0,sizes.length()-1);
         brands=brands.substring(0,brands.length()-1);
-
+        return getAllGoods();
     }
 }
